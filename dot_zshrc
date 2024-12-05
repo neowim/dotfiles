@@ -1,0 +1,95 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# ----------------------------------------
+# Zsh Configuration
+# ----------------------------------------
+
+# Load Powerlevel10k theme
+source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+
+# Add zsh-completions to your fpath
+fpath+=("$HOME/.zsh/plugins/zsh-completions/src")
+
+# Initialize the completion system
+autoload -Uz compinit
+compinit
+
+# Load zsh-autosuggestions
+source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Source zsh-history-substring-search
+source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# Bind arrow keys for history substring search
+bindkey '^[[A' history-substring-search-up   # Up arrow
+bindkey '^[[B' history-substring-search-down # Down arrow
+
+# Load zsh-syntax-highlighting (must be last)
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# History configurations
+HISTFILE=~/.zsh_history
+HISTSIZE=20000
+SAVEHIST=20000
+
+
+# Useful options
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_REDUCE_BLANKS
+setopt CORRECT
+setopt PROMPT_SUBST
+setopt AUTO_LIST
+
+# Search history with Ctrl+R using fzf
+if [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
+fi
+
+# ----------------------------------------
+# Environment Variables
+# ----------------------------------------
+# set the default editor
+export EDITOR="code -w"
+
+# set the default browser
+export BROWSER="microsoft-edge"
+
+# set the default pager
+export PAGER="less"
+
+
+# ----------------------------------------
+# Source Functions and Aliases and Load pyenv
+# ----------------------------------------
+# Load pyenv automatically
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
+
+# Source functions
+if [ -f ~/.zsh/functions.zsh ]; then
+    source ~/.zsh/functions.zsh
+fi
+
+# Source aliases
+if [ -f ~/.zsh/aliases.zsh ]; then
+    source ~/.zsh/aliases.zsh
+fi
+
+# Load direnv
+eval "$(direnv hook zsh)"
