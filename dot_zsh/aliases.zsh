@@ -19,6 +19,9 @@ alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 
+# neovim shortcuts
+alias vim="nvim"
+
 # Chezmoi Shortcuts
 alias cm="chezmoi"
 alias cms="chezmoi status"

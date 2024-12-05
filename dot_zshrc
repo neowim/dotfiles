@@ -64,7 +64,7 @@ fi
 # Environment Variables
 # ----------------------------------------
 # set the default editor
-export EDITOR="code -w"
+export EDITOR="nvim"
 
 # set the default browser
 export BROWSER="microsoft-edge"
@@ -72,6 +72,9 @@ export BROWSER="microsoft-edge"
 # set the default pager
 export PAGER="less"
 
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # ----------------------------------------
 # Source Functions and Aliases and Load pyenv
