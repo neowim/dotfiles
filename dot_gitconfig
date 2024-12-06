@@ -16,4 +16,5 @@
     tool = code
 [mergetool "code"]
     cmd = code --wait $MERGED
-
+[pull]
+    rebase = true
