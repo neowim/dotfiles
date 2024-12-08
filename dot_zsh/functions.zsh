@@ -130,3 +130,81 @@ function please() {
     fi
     sudo "$@"
 }
+
+# Function: killport
+# Description: Kills the process running on the specified port
+# Usage: killport <port_number>
+function killport() {
+    if [ -z "$1" ]; then
+        echo "Usage: killport <port_number>"
+        return 1
+    fi
+    local pid=$(lsof -ti tcp:"$1")
+    if [ -z "$pid" ]; then
+        echo "No process found running on port $1"
+        return 1
+    fi
+    echo "Killing process $pid running on port $1"
+    kill "$pid" && echo "Process terminated successfully"
+}
+
+# Function: gitignore
+# Description: Downloads .gitignore templates from gitignore.io
+# Usage: gitignore python node rust
+function gitignore() {
+    if [ "$#" -eq 0 ]; then
+        echo "Usage: gitignore <languages...>"
+        return 1
+    fi
+    local items=("$@")
+    local url="https://www.toptal.com/developers/gitignore/api/${(j:,:)items}"
+    curl -sL "$url" > .gitignore && echo ".gitignore created for: $@"
+}
+
+# Function: serve
+# Description: Starts a simple HTTP server in the current directory
+# Usage: serve [port]
+function serve() {
+    local port="${1:-8000}"
+    if command -v python3 &> /dev/null; then
+        python3 -m http.server "$port"
+    else
+        python -m SimpleHTTPServer "$port"
+    fi
+}
+
+# Function: cheat
+# Description: Get a cheat sheet for a command
+# Usage: cheat <command>
+function cheat() {
+    if [ -z "$1" ]; then
+        echo "Usage: cheat <command>"
+        return 1
+    fi
+    curl -s "cheat.sh/$1"
+}
+
+# Function: up
+# Description: Go up N directories
+# Usage: up <number>
+function up() {
+    local levels=${1:-1}
+    local path=""
+    for ((i=1; i<=levels; i++)); do
+        path="../$path"
+    done
+    cd "$path"
+}
+
+# Function: trash
+# Description: Move files to trash instead of permanent deletion
+# Usage: trash <file(s)>
+function trash() {
+    if [ "$#" -eq 0 ]; then
+        echo "Usage: trash <file(s)>"
+        return 1
+    fi
+    for file in "$@"; do
+        mv "$file" ~/.Trash/ && echo "Moved $file to trash"
+    done
+}

@@ -7,6 +7,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias ~="cd ~"  # Go to home directory
+alias back="cd -"
+alias cfg="cd ~/.config"
 
 # Listing
 alias ls="lsd --group-dirs first"
@@ -40,6 +42,11 @@ alias gp="git push"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gco="git checkout"
 alias gb="git branch"
+alias gd="git diff"
+alias gpl="git pull"
+alias grb="git rebase"
+alias grs="git reset"
+alias grh="git reset --hard"
 
 # Directory Shortcuts
 alias docs="cd ~/Documents"
@@ -93,6 +100,12 @@ alias ipconfig="ifconfig"
 # Docker Shortcuts
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
+
+# Modern CLI Tools
+alias rg="rg --smart-case"  # ripgrep with smart case
+alias fd="fd --hidden --follow"  # modern find
+alias ports="lsof -i -P -n | grep LISTEN"
+alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 
 # Miscellaneous
 alias path='echo -e ${PATH//:/\\n}'
