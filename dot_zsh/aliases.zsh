@@ -12,8 +12,16 @@ alias cfg="cd ~/.config"
 
 # Listing
 alias ls="lsd --group-dirs first"
-alias la="lsd -Ahl --group-dirs first"
-alias l="lsd -CF --group-dirs first"
+alias la="lsd -Ahl --group-dirs first"  # Show all files with human-readable sizes and long format
+alias l="lsd -F --group-dirs first"     # Simple listing with file type indicators
+alias ll="lsd -l --group-dirs first"    # Long listing format
+alias lt="lsd --tree --group-dirs first"  # Tree view
+alias lta="lsd --tree -a --group-dirs first"  # Tree view with hidden files
+alias lr="lsd -R --group-dirs first"    # Recursive listing
+alias lS="lsd -1 --group-dirs first"    # One file per line
+alias ldot="lsd -ld .* --group-dirs first"  # List only dot files
+alias lsize="lsd -lS --group-dirs first"  # Sort by size
+alias ldate="lsd -lt --group-dirs first"  # Sort by date
 
 # Safer Operations
 alias rm="rm -i"
