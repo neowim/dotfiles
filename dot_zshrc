@@ -96,3 +96,9 @@ fi
 
 # Load direnv
 eval "$(direnv hook zsh)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+# Added by Windsurf
+export PATH="/Users/wim/.codeium/windsurf/bin:$PATH"
