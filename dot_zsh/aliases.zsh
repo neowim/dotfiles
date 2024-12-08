@@ -10,7 +10,6 @@ alias ~="cd ~"  # Go to home directory
 
 # Listing
 alias ls="lsd --group-dirs first"
-alias ll="lsd -AhlF --group-dirs first"
 alias la="lsd -Ahl --group-dirs first"
 alias l="lsd -CF --group-dirs first"
 
@@ -21,6 +20,9 @@ alias mv="mv -i"
 
 # neovim shortcuts
 alias vim="nvim"
+
+alias top="htop"
+alias cat="bat"
 
 # Chezmoi Shortcuts
 alias cm="chezmoi"
@@ -42,6 +44,7 @@ alias gb="git branch"
 # Directory Shortcuts
 alias docs="cd ~/Documents"
 alias dl="cd ~/Downloads"
+alias dev="cd ~/Code"
 
 # System Updates (macOS)
 alias brewup="brew update && brew upgrade --greedy && brew cleanup --prune=all && brew doctor"
