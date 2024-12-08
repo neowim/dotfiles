@@ -20,6 +20,9 @@ source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 # Add zsh-completions to your fpath
 fpath+=("$HOME/.zsh/plugins/zsh-completions/src")
 
+# Load directory stack configuration
+source ~/.zsh/dirstack.zsh
+
 # Initialize the completion system
 autoload -Uz compinit
 compinit
