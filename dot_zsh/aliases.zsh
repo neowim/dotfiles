@@ -68,6 +68,7 @@ alias ports="lsof -i -P -n | grep LISTEN"  # Show listening ports
 
 # System Updates
 alias brewup="brew update && brew upgrade --greedy && brew cleanup --prune=all && brew doctor"
+alias upzsh="update_zsh_plugins"
 
 # Disk Usage
 alias df="df -h"
