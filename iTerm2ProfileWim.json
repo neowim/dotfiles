@@ -56,7 +56,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.10588235408067703
   },
-  "Columns" : 104,
+  "Columns" : 83,
   "Ansi 8 Color" : {
     "Red Component" : 0.57254904508590698,
     "Color Space" : "sRGB",
@@ -152,7 +152,7 @@
     "Green Component" : 1
   },
   "Silence Bell" : false,
-  "Rows" : 500,
+  "Rows" : 1000,
   "Draw Powerline Glyphs" : true,
   "Guid" : "C64547B9-8389-41C0-A47F-FAF4A4AA73FC",
   "Ansi 14 Color (Dark)" : {
@@ -420,6 +420,7 @@
     "Alpha Component" : 1,
     "Green Component" : 1
   },
+  "Prevent Opening in a Tab" : true,
   "Screen" : 0,
   "Ansi 4 Color (Dark)" : {
     "Red Component" : 0.15404300391674042,
@@ -497,7 +498,7 @@
   "Show Mark Indicators" : false,
   "Unicode Version" : 8,
   "Semantic History" : {
-    "editor" : "com.microsoft.VSCode",
+    "editor" : "com.todesktop.230313mzl4w4u92",
     "action" : "editor",
     "text" : ""
   },
@@ -595,7 +596,7 @@
           "knobs" : {
             "maxwidth" : 1.7976931348623157e+308,
             "base: priority" : 5,
-            "base: compression resistance" : 1,
+            "minwidth" : 0,
             "shared text color" : {
               "Red Component" : 0.90000000000000002,
               "Color Space" : "sRGB",
@@ -603,7 +604,7 @@
               "Alpha Component" : 1,
               "Green Component" : 0.63
             },
-            "minwidth" : 0
+            "base: compression resistance" : 1
           },
           "layout advanced configuration dictionary value" : {
             "remove empty components" : false,
