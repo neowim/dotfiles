@@ -11,7 +11,7 @@ alias cfg="cd ~/.config"
 # Directory Shortcuts
 alias docs="cd ~/Documents"
 alias dl="cd ~/Downloads"
-alias dev="cd ~/Code"
+alias dev="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Dev"
 
 # ----------------------------------------
 # Listing
