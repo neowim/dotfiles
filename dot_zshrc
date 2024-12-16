@@ -68,6 +68,7 @@ fi
 # ----------------------------------------
 # set the default editor
 export EDITOR="nvim"
+export VISUAL="code -w"
 
 # set the default browser
 export BROWSER="microsoft-edge"
