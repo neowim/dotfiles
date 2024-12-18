@@ -208,3 +208,54 @@ function trash() {
         mv "$file" ~/.Trash/ && echo "Moved $file to trash"
     done
 }
+
+# Python project initializer function with optional Python version
+new_python_project() {
+    if [ -z "$1" ]; then
+        echo "Usage: new_python_project <project_name> [python_version]"
+        return 1
+    fi
+
+    PROJECT_NAME=$1
+    PYTHON_VERSION=${2:-$(pyenv version-name)}  # Use the provided version or the current global pyenv version
+
+    # Step 1: Create project directory
+    echo "Creating project directory: $PROJECT_NAME"
+    mkdir -p "$PROJECT_NAME" && cd "$PROJECT_NAME"
+
+    # Step 2: Set local Python version
+    echo "Setting local Python version to $PYTHON_VERSION"
+    pyenv install -s "$PYTHON_VERSION"
+    pyenv local "$PYTHON_VERSION"
+
+    # Step 3: Create .envrc for direnv
+    echo "Configuring direnv..."
+    echo -e "layout python3\nexport PYENV_VERSION=$PYTHON_VERSION" > .envrc
+
+    # Step 4: Allow direnv
+    direnv allow
+
+    # Step 5: Install basic tools
+    echo "Installing essential tools: pip, setuptools, wheel..."
+    pip install --upgrade pip setuptools wheel
+
+    # Step 6: Initialize an empty requirements.txt
+    echo "Creating an empty requirements.txt"
+    touch requirements.txt
+
+    # Step 7: Initialize Git repository
+    echo "Initializing Git repository..."
+    git init
+    git add .python-version .envrc requirements.txt
+    git commit -m "Initial project setup"
+
+    # Final output
+    echo "✅ Project '$PROJECT_NAME' has been initialized!"
+    echo "Python version: $(python --version)"
+    echo "Environment will activate automatically when you 'cd' into the project folder."
+    echo ""
+    echo "Example Usage:"
+    echo "  new_python_project my_project 3.11.6"
+    echo "  cd my_project"
+    echo "  pip install <your-packages> && pip freeze > requirements.txt"
+}

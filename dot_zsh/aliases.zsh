@@ -38,13 +38,15 @@ alias gaa="git add --all"   # Add all changes
 alias gcam="git commit -m"
 alias gp="git push"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gc="git commit"
 alias gco="git checkout"
 alias gb="git branch"
-alias gd="git diff"
+alias gd="git difftool"
 alias gpl="git pull"
 alias grb="git rebase"
 alias grs="git reset"
 alias grh="git reset --hard"
+alias git-diff='git difftool'
 
 # ----------------------------------------
 # Docker Operations
@@ -87,6 +89,7 @@ alias cat="bat"
 alias python="python3"
 alias py="python3"
 alias pip="pip3"
+alias npp="new_python_project"
 
 # ----------------------------------------
 # Chezmoi

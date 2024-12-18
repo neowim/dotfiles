@@ -4,17 +4,31 @@
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	squash-all = "!f(){ git reset $(git commit-tree \"HEAD^{tree}\" \"$@\");};f"
+
 [init]
 	defaultBranch = main
+
 [core]
 	excludesfile = /Users/wim/.gitignore_global
+    editor = code --wait
+
 [diff]
-    tool = code
-[difftool "code"]
+    tool = vscode
+
+[difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
+
 [merge]
-    tool = code
-[mergetool "code"]
+    tool = vscode
+
+[mergetool "vscode"]
     cmd = code --wait $MERGED
+
 [pull]
     rebase = true
+
+[difftool]
+	prompt = false
+
+[pager]
+	difftool = false

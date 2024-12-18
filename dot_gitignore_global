@@ -335,6 +335,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.direnv/
+
 
 # Spyder project settings
 .spyderproject
@@ -546,6 +548,7 @@ zsdoc/data
 # robbyrussell/oh-my-zsh/plugins/per-directory-history plugin's files
 # (when set-up to store the history in the local directory)
 .directory_history
+
 
 # MichaelAquilina/zsh-autoswitch-virtualenv plugin's files
 # (for Zsh plugins using Python)
