@@ -278,8 +278,10 @@ new_python_project() {
 
     # Step 5: Install basic tools using direnv activation
     echo "Installing essential tools: pip, setuptools, wheel..."
-    direnv reload  # Ensures the environment is activated for subsequent steps
-    pip install --upgrade pip setuptools wheel || return 1
+    direnv allow  # Ensure .envrc is allowed
+    direnv reload # Reload the environment for this session
+    direnv exec . pip install --upgrade pip setuptools wheel || return 1
+
 
     # Step 6: Initialize an empty requirements.txt
     echo "Creating an empty requirements.txt"
