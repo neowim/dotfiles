@@ -209,6 +209,34 @@ function trash() {
     done
 }
 
+# Function: create virtual environment using direnv
+mkenv() {
+    # Ensure we are in a project directory
+    if [ ! -d "$PWD" ]; then
+        echo "Error: Current directory is invalid. Navigate to a valid project folder."
+        return 1
+    fi
+
+    # Ensure a venv exists or create one
+    if [ ! -d "venv" ]; then
+        echo "Creating virtual environment in venv..."
+        python -m venv venv || return 1
+    fi
+
+    # Create .envrc with the required configuration
+    echo "Creating .envrc for direnv..."
+    echo -e "export VIRTUAL_ENV=venv\nlayout python3" > .envrc
+
+    # Allow direnv to manage this directory
+    echo "Allowing direnv..."
+    direnv allow
+
+    # Final output
+    echo "✅ .envrc has been created and configured!"
+    echo "Environment will automatically activate when you 'cd' into this folder."
+}
+
+
 # Python project initializer function with optional Python version
 new_python_project() {
     if [ -z "$1" ]; then
@@ -219,43 +247,58 @@ new_python_project() {
     PROJECT_NAME=$1
     PYTHON_VERSION=${2:-$(pyenv version-name)}  # Use the provided version or the current global pyenv version
 
+    # Check dependencies
+    for cmd in pyenv direnv git; do
+        if ! command -v $cmd &> /dev/null; then
+            echo "Error: $cmd is not installed. Please install it first."
+            return 1
+        fi
+    done
+
     # Step 1: Create project directory
     echo "Creating project directory: $PROJECT_NAME"
-    mkdir -p "$PROJECT_NAME" && cd "$PROJECT_NAME"
+    mkdir -p "$PROJECT_NAME" && cd "$PROJECT_NAME" || return 1
 
     # Step 2: Set local Python version
     echo "Setting local Python version to $PYTHON_VERSION"
-    pyenv install -s "$PYTHON_VERSION"
+    if ! pyenv install -s "$PYTHON_VERSION"; then
+        echo "Failed to install Python version $PYTHON_VERSION"
+        return 1
+    fi
     pyenv local "$PYTHON_VERSION"
 
-    # Step 3: Create .envrc for direnv
-    echo "Configuring direnv..."
-    echo -e "layout python3\nexport PYENV_VERSION=$PYTHON_VERSION" > .envrc
+    # Step 3: Create a .venv virtual environment
+    echo "Creating virtual environment in venv..."
+    python -m venv venv || return 1
 
-    # Step 4: Allow direnv
+    # Step 4: Configure direnv to use the venv environment
+    echo "Configuring direnv..."
+    echo -e "export VIRTUAL_ENV=venv\nlayout python3" > .envrc
     direnv allow
 
-    # Step 5: Install basic tools
+    # Step 5: Install basic tools using direnv activation
     echo "Installing essential tools: pip, setuptools, wheel..."
-    pip install --upgrade pip setuptools wheel
+    direnv reload  # Ensures the environment is activated for subsequent steps
+    pip install --upgrade pip setuptools wheel || return 1
 
     # Step 6: Initialize an empty requirements.txt
     echo "Creating an empty requirements.txt"
     touch requirements.txt
 
-    # Step 7: Initialize Git repository
+    # Step 7: Add a .gitignore
+    echo "Adding .gitignore"
+    echo -e "__pycache__/\nvenv/\n.direnv/\n*.pyc\n.DS_Store" > .gitignore
+
+    # Step 8: Initialize Git repository
     echo "Initializing Git repository..."
     git init
-    git add .python-version .envrc requirements.txt
+    git add .python-version .envrc requirements.txt .gitignore
     git commit -m "Initial project setup"
 
     # Final output
     echo "✅ Project '$PROJECT_NAME' has been initialized!"
-    echo "Python version: $(python --version)"
-    echo "Environment will activate automatically when you 'cd' into the project folder."
-    echo ""
-    echo "Example Usage:"
-    echo "  new_python_project my_project 3.11.6"
-    echo "  cd my_project"
-    echo "  pip install <your-packages> && pip freeze > requirements.txt"
+    echo "Next steps:"
+    echo "  1. Activate the environment by navigating to the project folder: cd $PROJECT_NAME"
+    echo "  2. Install packages: pip install <your-packages>"
+    echo "  3. Freeze dependencies: pip freeze > requirements.txt"
 }
