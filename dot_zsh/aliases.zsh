@@ -11,7 +11,7 @@ alias cfg="cd ~/.config"
 # Directory Shortcuts
 alias docs="cd ~/Documents"
 alias dl="cd ~/Downloads"
-alias dev="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Dev"
+alias dev="cd ~/Dev"
 
 # ----------------------------------------
 # Listing
@@ -113,9 +113,6 @@ alias myip="curl ifconfig.me"
 alias ipconfig="ifconfig"
 
 # macOS Specific
-alias o.="open ."
-alias pbcopy="pbcopy"
-alias pbpaste="pbpaste"
 
 # Common
 alias c="clear"
