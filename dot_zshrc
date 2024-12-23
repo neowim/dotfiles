@@ -72,7 +72,7 @@ export EDITOR="nvim"
 export VISUAL="code -w"
 
 # set the default browser
-export BROWSER="microsoft-edge"
+export BROWSER="open -a 'Microsoft Edge'"
 
 # set the default pager
 export PAGER="bat --paging=always"
