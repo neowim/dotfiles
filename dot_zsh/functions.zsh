@@ -206,6 +206,8 @@ mkenv() {
     # Allow direnv to manage this directory
     echo "Allowing direnv..."
     direnv allow
+    # Update pip, setuptools, and wheel
+    pip install --upgrade pip setuptools wheel
 
     # Final output
     echo "✅ .envrc has been created and configured!"
@@ -277,6 +279,7 @@ syncdeps() {
 
     # Install dependencies
     echo "Installing dependencies from requirements.txt..."
+    pip install --upgrade pip setuptools wheel
     pip install -r requirements.txt || return 1
     echo "✅ All dependencies from requirements.txt are installed!"
 }
@@ -300,6 +303,7 @@ cleandeps() {
 
     # Reinstall dependencies to restore indirect dependencies
     echo "Reinstalling dependencies from requirements.txt..."
+    pip install --upgrade pip setuptools wheel
     pip install -r requirements.txt || return 1
     echo "✅ Unused dependencies have been removed and required ones reinstalled!"
 }
