@@ -120,17 +120,6 @@ function path() {
     echo "$PATH" | tr ':' '\n'
 }
 
-# Function: please
-# Description: A fun alternative to 'sudo' that responds politely.
-# Usage: please <command>
-function please() {
-    if [ "$#" -eq 0 ]; then
-        echo "Usage: please <command>"
-        return 1
-    fi
-    sudo "$@"
-}
-
 # Function: killport
 # Description: Kills the process running on the specified port
 # Usage: killport <port_number>
@@ -196,19 +185,6 @@ function up() {
     cd "$path"
 }
 
-# Function: trash
-# Description: Move files to trash instead of permanent deletion
-# Usage: trash <file(s)>
-function trash() {
-    if [ "$#" -eq 0 ]; then
-        echo "Usage: trash <file(s)>"
-        return 1
-    fi
-    for file in "$@"; do
-        mv "$file" ~/.Trash/ && echo "Moved $file to trash"
-    done
-}
-
 # Function: create virtual environment using direnv
 mkenv() {
     # Ensure we are in a project directory
@@ -234,6 +210,156 @@ mkenv() {
     # Final output
     echo "✅ .envrc has been created and configured!"
     echo "Environment will automatically activate when you 'cd' into this folder."
+}
+
+adddep() {
+    # Ensure a package name is provided
+    if [ -z "$1" ]; then
+        echo "Usage: adddep <package-name>"
+        return 1
+    fi
+
+    PACKAGE=$1
+
+    # Ensure a virtual environment is activated
+    if [ -z "$VIRTUAL_ENV" ]; then
+        echo "Error: No virtual environment is active. Activate one first."
+        return 1
+    fi
+
+    # Install the package
+    echo "Installing $PACKAGE..."
+    pip install "$PACKAGE" || return 1
+
+    # Update requirements.txt
+    echo "Updating requirements.txt..."
+    pip freeze > requirements.txt
+    echo "✅ $PACKAGE has been installed and added to requirements.txt!"
+}
+
+remdep() {
+    # Ensure a package name is provided
+    if [ -z "$1" ]; then
+        echo "Usage: remdep <package-name>"
+        return 1
+    fi
+
+    PACKAGE=$1
+
+    # Ensure a virtual environment is activated
+    if [ -z "$VIRTUAL_ENV" ]; then
+        echo "Error: No virtual environment is active. Activate one first."
+        return 1
+    fi
+
+    # Uninstall the package
+    echo "Uninstalling $PACKAGE..."
+    pip uninstall -y "$PACKAGE" || return 1
+
+    # Update requirements.txt
+    echo "Updating requirements.txt..."
+    pip freeze > requirements.txt
+    echo "✅ $PACKAGE has been uninstalled and removed from requirements.txt!"
+}
+
+syncdeps() {
+    # Ensure a virtual environment is activated
+    if [ -z "$VIRTUAL_ENV" ]; then
+        echo "Error: No virtual environment is active. Activate one first."
+        return 1
+    fi
+
+    # Ensure requirements.txt exists
+    if [ ! -f "requirements.txt" ]; then
+        echo "Error: requirements.txt not found!"
+        return 1
+    fi
+
+    # Install dependencies
+    echo "Installing dependencies from requirements.txt..."
+    pip install -r requirements.txt || return 1
+    echo "✅ All dependencies from requirements.txt are installed!"
+}
+
+cleandeps() {
+    # Ensure a virtual environment is activated
+    if [ -z "$VIRTUAL_ENV" ]; then
+        echo "Error: No virtual environment is active. Activate one first."
+        return 1
+    fi
+
+    # Ensure requirements.txt exists
+    if [ ! -f "requirements.txt" ]; then
+        echo "Error: requirements.txt not found!"
+        return 1
+    fi
+
+    # Remove unused dependencies
+    echo "Cleaning up unused dependencies..."
+    pip freeze | grep -v -f requirements.txt - | xargs pip uninstall -y
+
+    # Reinstall dependencies to restore indirect dependencies
+    echo "Reinstalling dependencies from requirements.txt..."
+    pip install -r requirements.txt || return 1
+    echo "✅ Unused dependencies have been removed and required ones reinstalled!"
+}
+
+testenv() {
+    # Ensure a virtual environment is activated
+    if [ -z "$VIRTUAL_ENV" ]; then
+        echo "Error: No virtual environment is active. Activate one first."
+        return 1
+    fi
+
+    # Check if pytest is installed
+    if ! command -v pytest &>/dev/null; then
+        echo "Error: pytest is not installed. Install it with 'pip install pytest'."
+        return 1
+    fi
+
+    # Run tests
+    echo "Running tests with pytest..."
+    pytest || return 1
+    echo "✅ All tests passed!"
+}
+
+freezeenv() {
+    # Ensure a virtual environment is activated
+    if [ -z "$VIRTUAL_ENV" ]; then
+        echo "Error: No virtual environment is active. Activate one first."
+        return 1
+    fi
+
+    # Freeze dependencies
+    echo "Freezing current environment dependencies to requirements.txt..."
+    pip freeze > requirements.txt
+    echo "✅ Dependencies have been frozen into requirements.txt!"
+}
+
+rebuildenv() {
+    # Ensure a virtual environment is activated
+    if [ -z "$VIRTUAL_ENV" ]; then
+        echo "Error: No virtual environment is active. Activate one first."
+        return 1
+    fi
+
+    # Remove and recreate the virtual environment
+    echo "Rebuilding the virtual environment..."
+    rm -rf venv
+    python -m venv venv || return 1
+    source venv/bin/activate || return 1
+
+    # Reinstall dependencies
+    if [ -f "requirements.txt" ]; then
+        echo "Installing dependencies from requirements.txt..."
+        pip install --upgrade pip setuptools wheel
+        pip install -r requirements.txt || return 1
+    else
+        echo "requirements.txt not found. Creating an empty one..."
+        touch requirements.txt
+    fi
+
+    echo "✅ Virtual environment has been rebuilt and dependencies installed!"
 }
 
 
