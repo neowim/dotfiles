@@ -105,7 +105,7 @@ alias cmd="chezmoi diff"
 # Misc Utilities
 # ----------------------------------------
 # Quick Edit and Reload
-alias zshconfig="nano ~/.zshrc"
+alias zshconfig="chezmoi edit ~/.zshrc"
 alias reload="source ~/.zshrc"
 
 # Networking
@@ -116,7 +116,7 @@ alias ipconfig="ifconfig"
 
 # Common
 alias c="clear"
-alias h="history"
-alias please="sudo"
+alias h="history | grep -i"
 alias extract="tar -xvf"
 alias grep="grep --color=auto"
+alias cur="cursor --no-sandbox"
