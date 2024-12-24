@@ -85,9 +85,9 @@ export NVM_DIR="$HOME/.nvm"
 # Source Functions and Aliases and Load pyenv
 # ----------------------------------------
 # Load pyenv automatically
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # Load direnv
 eval "$(direnv hook zsh)"
