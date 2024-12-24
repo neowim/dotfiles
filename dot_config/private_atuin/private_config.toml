@@ -35,7 +35,7 @@ sync_address = "http://192.168.2.9:8888"
 ## how often to sync history. note that this is only triggered when a command
 ## is ran, so sync intervals may well be longer
 ## set it to 0 to sync after every command
-sync_frequency = "300s"
+sync_frequency = "60s"
 
 ## which search mode to use
 ## possible values: prefix, fulltext, fuzzy, skim
@@ -47,7 +47,7 @@ filter_mode = "global"
 
 ## With workspace filtering enabled, Atuin will filter for commands executed
 ## in any directory within a git repository tree (default: false)
-# workspaces = false
+workspaces = true
 
 ## which filter mode to use when atuin is invoked from a shell up-key binding
 ## the accepted values are identical to those of "filter_mode"
@@ -121,7 +121,7 @@ show_preview = true
 ## Configure whether or not to show the help row, which includes the current Atuin
 ## version (and whether an update is available), a keymap hint, and the total
 ## amount of commands in your history.
-# show_help = true
+show_help = true
 
 ## Configure whether or not to show tabs for search and inspect
 # show_tabs = true
@@ -132,7 +132,7 @@ show_preview = true
 ## 3. Slack oauth tokens (bot, user)
 ## 4. Slack webhooks
 ## 5. Stripe live/test keys
-# secrets_filter = true
+secrets_filter = true
 
 ## Defaults to true. If enabled, upon hitting enter Atuin will immediately execute the command. Press tab to return to the shell and edit.
 # This applies for new installs. Old installs will keep the old behaviour unless configured otherwise.
@@ -164,11 +164,11 @@ enter_accept = false
 [stats]
 ## Set commands where we should consider the subcommand for statistics. Eg, kubectl get vs just kubectl
 common_subcommands = [
-#   "apt",
+"apt",
 #   "cargo",
 #   "composer",
-#   "dnf",
-#   "docker",
+"dnf",
+"docker",
 "git",
 #   "go",
 #   "ip",
@@ -178,10 +178,10 @@ common_subcommands = [
 "npm",
 #   "pecl",
 #   "pnpm",
-#   "podman",
+"podman",
 #   "port",
-#   "systemctl",
-#   "tmux",
+"systemctl",
+"tmux",
 #   "yarn",
 ]
 
@@ -194,6 +194,7 @@ ignored_commands = [
 "ls",
 "ll",
 "la",
+"pwd",
 #   "vi"
 ]
 
