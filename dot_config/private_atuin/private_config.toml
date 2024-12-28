@@ -35,7 +35,7 @@ sync_address = "http://192.168.2.9:8888"
 ## how often to sync history. note that this is only triggered when a command
 ## is ran, so sync intervals may well be longer
 ## set it to 0 to sync after every command
-sync_frequency = "60s"
+sync_frequency = 0
 
 ## which search mode to use
 ## possible values: prefix, fulltext, fuzzy, skim
@@ -136,7 +136,7 @@ secrets_filter = true
 
 ## Defaults to true. If enabled, upon hitting enter Atuin will immediately execute the command. Press tab to return to the shell and edit.
 # This applies for new installs. Old installs will keep the old behaviour unless configured otherwise.
-enter_accept = false
+enter_accept = true
 
 ## Defaults to "emacs".  This specifies the keymap on the startup of `atuin
 ## search`.  If this is set to "auto", the startup keymap mode in the Atuin
@@ -165,13 +165,13 @@ enter_accept = false
 ## Set commands where we should consider the subcommand for statistics. Eg, kubectl get vs just kubectl
 common_subcommands = [
 "apt",
-#   "cargo",
-#   "composer",
+"cargo",
+"composer",
 "dnf",
 "docker",
 "git",
-#   "go",
-#   "ip",
+"go",
+"ip",
 #   "kubectl",
 #   "nix",
 #   "nmcli",
@@ -182,7 +182,7 @@ common_subcommands = [
 #   "port",
 "systemctl",
 "tmux",
-#   "yarn",
+"yarn",
 ]
 
 ## Set commands that should be totally stripped and ignored from stats
@@ -195,7 +195,7 @@ ignored_commands = [
 "ll",
 "la",
 "pwd",
-#   "vi"
+"vim"
 ]
 
 [keys]
