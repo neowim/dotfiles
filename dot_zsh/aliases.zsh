@@ -113,7 +113,7 @@ alias myip="curl ifconfig.me"
 alias ipconfig="ifconfig"
 
 # Open TWS with ibs
-alias tws="/opt/ibs/twsstartmacos.sh"
+alias tws="/opt/ibc/twsstartmacos.sh"
 # macOS Specific
 
 # Common
