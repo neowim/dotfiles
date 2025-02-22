@@ -112,6 +112,8 @@ alias reload="source ~/.zshrc"
 alias myip="curl ifconfig.me"
 alias ipconfig="ifconfig"
 
+# Open TWS with ibs
+alias tws="/opt/ibs/twsstartmacos.sh"
 # macOS Specific
 
 # Common
