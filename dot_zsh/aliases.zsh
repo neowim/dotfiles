@@ -35,6 +35,7 @@ alias gs="git status -sb"   # Shorter status output
 alias gst="git status"
 alias ga="git add"
 alias gaa="git add --all"   # Add all changes
+alias ginit='git add . && git commit -m "chore: initial commit with project scaffolding"'
 alias gcam="git commit -m"
 alias gp="git push"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
