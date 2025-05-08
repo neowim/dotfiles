@@ -69,7 +69,7 @@ fi
 # ----------------------------------------
 # set the default editor
 export EDITOR="nvim"
-export VISUAL="code -w"
+export VISUAL="zed -w"
 
 # set the default browser
 export BROWSER="open -a 'Microsoft Edge'"
@@ -139,4 +139,3 @@ if type compdef &>/dev/null; then
   fi
 fi
 ###-end-pnpm-completion-###
-
